@@ -8,3 +8,6 @@
     <?php wp_head(); ?>
 </head>
 <body>
+<header>
+    <?php get_template_part('templates/components/navigations/navigation'); ?>
+</header>

@@ -1,34 +1,64 @@
 <?php
 // CONFIGURATION DU THÈME
-function plaitheme_supports() : void
+function plaitheme_supports(): void
 {
-    add_theme_support( 'title-tag');
-};
-function plaitheme_register_assets() :void
-{
-    wp_enqueue_style( 'montheme-css-principal', get_template_directory_uri() . '/public/style.css', [], '1.0');
-    wp_enqueue_script( 'montheme-script-principal', get_template_directory_uri() . '/public/script.js', [], false, true);
-};
+    add_theme_support('title-tag');
+    add_theme_support('menus');
+    register_nav_menu('header-menu', 'Header Menu');
+}
 
-function plaitheme_title_separator($separateur_original) :string
+;
+function plaitheme_register_assets(): void
+{
+    wp_enqueue_style('montheme-css-principal', get_template_directory_uri() . '/public/style.css', [], '1.0');
+    wp_enqueue_script('montheme-script-principal', get_template_directory_uri() . '/public/script.js', [], false, true);
+}
+
+;
+
+function plaitheme_title_separator($separateur_original): string
 {
     return (' - ');
-};
+}
+
+;
+
+function plaitheme_sensibilisations_cpt(): void
+{
+    register_post_type('sensibilisation',
+        [
+            'labels' =>
+                [
+                    'name' => 'Sensibilisations',
+                    'singular_name' => 'Sensibilisation',
+                    'add_new'       => 'Ajouter une sensibilisation',
+                    'add_new_item'       => 'Ajouter une sensibilisation',
+                    'edit_item'     => 'Modifier la sensibilisation',
+                    'not_found'     => 'Aucune sensibilisation trouvée',
+                ],
+            'public' => true,
+            'menu_position' => 10,
+            'has_archive' => false,
+            'supports' => ['title'],
+            'menu_icon' => 'dashicons-welcome-learn-more',
+        ]);
+}
 
 add_action('after_setup_theme', 'plaitheme_supports');
 add_action('wp_enqueue_scripts', 'plaitheme_register_assets');
-add_action('document_title_separator', 'plaitheme_title_separator');
+add_filter('document_title_separator', 'plaitheme_title_separator');
+add_action('init', 'plaitheme_sensibilisations_cpt');
 
 
 // DÉSACTIVATION DE GUTENBERG ET DES CSS NATIFS
-add_filter( 'use_block_editor_for_post', '__return_false' );
-add_filter( 'use_widgets_block_editor', '__return_false' );
+add_filter('use_block_editor_for_post', '__return_false');
+add_filter('use_widgets_block_editor', '__return_false');
 
-add_action( 'wp_enqueue_scripts', function() {
-    wp_dequeue_style( 'wp-block-library' );
-    wp_dequeue_style( 'wp-block-library-theme' );
-    wp_dequeue_style( 'global-styles' );
-}, 20 );
+add_action('wp_enqueue_scripts', function () {
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style('global-styles');
+}, 20);
 
 
 // DÉSACTIVATION DU TEXT-AREA DE BASE SUR LES PAGES
