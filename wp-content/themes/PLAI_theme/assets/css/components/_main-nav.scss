@@ -1,0 +1,33 @@
+.main-nav {
+  padding: $space-xs $space-s;
+  margin: $space-xs $space-s;
+  background-color: $background-primary;
+  border-radius: $radius-navBar-main;
+
+  &__list {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: $space-xs;
+  }
+
+  &__list > li:first-child {
+    margin-right: auto;
+  }
+
+  &__link, &__toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-primary;
+    font: $font-body;
+  }
+  &__overlay{
+    &.is-hidden{
+      display: none;
+    }
+    &.is-open{
+
+    }
+  }
+}

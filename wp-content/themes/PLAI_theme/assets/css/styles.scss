@@ -1,1 +1,7 @@
-@import "general/reset.css";
+@import "vendors/_reset.css";
+@import "base/_reset";
+@import "base/_base";
+@import "base/_typography";
+@import "utils/_variables";
+@import "utils/_helpers";
+@import "layouts/header";

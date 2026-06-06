@@ -16,11 +16,11 @@
         </li>
 
         <li class="main-nav__item main-nav__item--has-overlay">
-            <button type="button" class="main-nav__toggle-btn" aria-expanded="false" aria-controls="overlay-outils">
-                Sensibilisation
+            <button type="button" class="main-nav__toggle-btn" id="js-main-nav__toggle-btn" aria-expanded="false" aria-controls="overlay-outils">
+                Outils
             </button>
 
-            <div id="overlay-outils" class="main-nav__overlay">
+            <div id="overlay-outils js-main-nav__overlay" class="main-nav__overlay is-hidden">
                 <ul class="main-nav__sublist">
 
                     <li class="main-nav__sublist__item">
