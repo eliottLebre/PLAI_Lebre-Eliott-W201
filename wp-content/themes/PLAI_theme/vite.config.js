@@ -5,6 +5,7 @@ import path from "path";
 
 export default defineConfig({
     base: "/plai_theme/public/",
+    publicDir: 'static',
 
     plugins: [
         {

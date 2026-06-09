@@ -11,7 +11,7 @@ function plaitheme_supports(): void
 function plaitheme_register_assets(): void
 {
     wp_enqueue_style('montheme-css-principal', get_template_directory_uri() . '/public/style.css', [], '1.0');
-    wp_enqueue_script('montheme-script-principal', get_template_directory_uri() . '/public/script.js', [], false, true);
+    wp_enqueue_script('montheme-script-principal', get_template_directory_uri() . '/public/main.js', [], false, true);
 }
 
 ;

@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "watch": "chokidar \"./assets/js/app/**/*.js\" \"./assets/css/**/*.scss\" \"assets/css/base/reset.css\" -c \"vite build\""
+    "watch": "chokidar \"./assets/js/app/**/*.js\" \"./assets/css/**/*.scss\" \"assets/css/**/*.css\" -c \"vite build\""
   },
   "dependencies": {
     "autoprefixer": "^10.5.0",

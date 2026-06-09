@@ -15,16 +15,25 @@
             </a>
         </li>
 
+        <li class="main-nav__item main-nav__item--burger is-mobile">
+            <button type="button" class="main-nav__burger js-nav-burger" aria-label="Ouvrir le menu"
+                    aria-expanded="false">
+            </button>
+        </li>
+
+
         <li class="main-nav__item main-nav__item--has-overlay">
-            <button type="button" class="main-nav__toggle-btn" id="js-main-nav__toggle-btn" aria-expanded="false" aria-controls="overlay-outils">
+            <button type="button" class="main-nav__toggle-btn js-main-nav__toggle-btn" aria-expanded="false"
+                    aria-controls="overlay-outils">
                 Outils
             </button>
 
-            <div id="overlay-outils js-main-nav__overlay" class="main-nav__overlay is-hidden">
+            <div id="overlay-outils" class="main-nav__overlay js-main-nav__overlay is-hidden">
                 <ul class="main-nav__sublist">
 
-                    <li class="main-nav__sublist__item">
-                        <a href="<?= home_url('/tools'); ?>" class="main-nav__sublist__link">Voir tous les outils</a>
+                    <li class="main-nav__item">
+                        <a href="<?= home_url('/tools'); ?>" class="main-nav__link main-nav__link--underline">Voir
+                            tous</a>
                     </li>
 
                     <?php
@@ -40,9 +49,9 @@
                     if ($query->have_posts()) :
                         while ($query->have_posts()) : $query->the_post(); ?>
 
-                            <li class="main-nav__sublist__item">
+                            <li class="main-nav__item">
                                 <a href="<?php the_permalink(); ?>"
-                                   class="main-nav__sublist__link"><?php the_title(); ?></a>
+                                   class="main-nav__link"><?php the_title(); ?></a>
                             </li>
 
                         <?php endwhile;
@@ -53,6 +62,9 @@
             </div>
         </li>
 
+        <li class="main-nav__item is-mobile">
+            <a href="<?php echo esc_url(home_url('/tools')); ?>" class="main-nav__link">Outils</a>
+        </li>
         <li class="main-nav__item">
             <a href="<?php echo esc_url(home_url('/contact')); ?>" class="main-nav__link">Déroulement d'une demande</a>
         </li>
