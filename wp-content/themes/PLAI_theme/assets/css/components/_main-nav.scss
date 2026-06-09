@@ -8,11 +8,12 @@
   &__list {
     display: flex;
     gap: $space-xs;
+
+    > li:first-child {
+      margin-right: auto;
+    }
   }
 
-  &__list > li:first-child {
-    margin-right: auto;
-  }
 
   &__item.is-mobile {
     display: none;
@@ -34,19 +35,39 @@
   }
 
   &__toggle-btn {
+    position: relative;
     display: flex;
     align-items: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: calc(100% + $space-m - 8.5px);
+      left: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: $background-primary;
+      border-top: $border-xs solid $background-stroke;
+      border-left: $border-xs solid $background-stroke;
+      transform: translateX(-50%) rotate(45deg);
+      z-index: 10;
+      visibility: hidden;
+    }
+
+    &.is-open::before {
+      visibility: visible;
+    }
+
+    &::after {
+      content: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 9L12 16L5 9" stroke="%23292824" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      display: inline-flex;
+    }
+
+    &.is-open::after {
+      transform: rotate(180deg);
+    }
   }
 
-  &__toggle-btn::after {
-    content: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 9L12 16L5 9" stroke="%23292824" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
-    display: inline-flex;
-    transition: transform 0.2s ease-out;
-  }
-
-  &__toggle-btn.is-open::after {
-    transform: rotate(180deg);
-  }
 
   @media (hover: hover) {
     &__item--has-overlay:hover,
@@ -55,8 +76,12 @@
         display: block;
       }
 
-      .main-nav__toggle-btn::after, {
+      .main-nav__toggle-btn::after {
         transform: rotate(180deg);
+      }
+
+      .main-nav__toggle-btn::before {
+        visibility: visible;
       }
     }
   }
@@ -81,19 +106,6 @@
       background-color: $background-primary;
       border: $border-xs solid $background-stroke;
       border-radius: $radius-button;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: -8.5px;
-        left: 80px;
-        width: 16px;
-        height: 16px;
-        background-color: $background-primary;
-        border-top: $border-xs solid $background-stroke;
-        border-left: $border-xs solid $background-stroke;
-        transform: rotate(45deg);
-      }
 
       > :first-child {
         grid-column: span 2;

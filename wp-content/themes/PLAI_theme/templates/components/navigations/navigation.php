@@ -21,58 +21,74 @@
             </button>
         </li>
 
+        <?php foreach (dw_get_navigation_links('header-menu') as $link) : ?>
 
-        <li class="main-nav__item main-nav__item--has-overlay">
-            <button type="button" class="main-nav__toggle-btn js-main-nav__toggle-btn" aria-expanded="false"
-                    aria-controls="overlay-outils">
-                Outils
-            </button>
+            <?php
+            if (rtrim($link->href, '/') === rtrim(home_url(), '/')) {
+                continue;
+            }
+            ?>
 
-            <div id="overlay-outils" class="main-nav__overlay js-main-nav__overlay is-hidden">
-                <ul class="main-nav__sublist">
+            <?php
+            if (strpos($link->href, '/tools') !== false):
+                ?>
+                <li class="main-nav__item is-mobile">
+                    <a href="<?= esc_url($link->href) ?>"
+                       class="main-nav__link is-mobile"><?= esc_html($link->label) ?></a>
+                </li>
 
-                    <li class="main-nav__item">
-                        <a href="<?= home_url('/tools'); ?>" class="main-nav__link main-nav__link--underline">Voir
-                            tous</a>
-                    </li>
+                <li class="main-nav__item main-nav__item--has-overlay">
 
-                    <?php
-                    $args = [
-                            'post_type' => 'sensibilisation',
-                            'posts_per_page' => -1,
-                            'orderby' => 'title',
-                            'order' => 'ASC'
-                    ];
+                    <button type="button" class="main-nav__toggle-btn js-main-nav__toggle-btn" aria-expanded="false"
+                            aria-controls="overlay-outils">
+                        <?= esc_html($link->label) ?>
+                    </button>
 
-                    $query = new WP_Query($args);
+                    <div id="overlay-outils" class="main-nav__overlay js-main-nav__overlay is-hidden">
+                        <ul class="main-nav__sublist">
 
-                    if ($query->have_posts()) :
-                        while ($query->have_posts()) : $query->the_post(); ?>
 
                             <li class="main-nav__item">
-                                <a href="<?php the_permalink(); ?>"
-                                   class="main-nav__link"><?php the_title(); ?></a>
+                                <a href="<?= esc_url($link->href) ?>" class="main-nav__link main-nav__link--underline">Voir
+                                    tous</a>
                             </li>
 
-                        <?php endwhile;
-                        wp_reset_postdata();
-                    endif;
-                    ?>
-                </ul>
-            </div>
-        </li>
 
-        <li class="main-nav__item is-mobile">
-            <a href="<?php echo esc_url(home_url('/tools')); ?>" class="main-nav__link">Outils</a>
-        </li>
-        <li class="main-nav__item">
-            <a href="<?php echo esc_url(home_url('/contact')); ?>" class="main-nav__link">Déroulement d'une demande</a>
-        </li>
-        <li class="main-nav__item">
-            <a href="<?php echo esc_url(home_url('/contact')); ?>" class="main-nav__link">Introduire une demande</a>
-        </li>
-        <li class="main-nav__item">
-            <a href="<?php echo esc_url(home_url('/contact')); ?>" class="main-nav__link">Nous contacter</a>
-        </li>
+                            <?php
+                            $args = [
+                                    'post_type' => 'sensibilisation',
+                                    'posts_per_page' => -1,
+                                    'orderby' => 'title',
+                                    'order' => 'ASC'
+                            ];
+
+                            $query = new WP_Query($args);
+
+                            if ($query->have_posts()) :
+                                while ($query->have_posts()) : $query->the_post(); ?>
+
+                                    <li class="main-nav__item">
+                                        <a href="<?php the_permalink(); ?>"
+                                           class="main-nav__link"><?php the_title(); ?></a>
+                                    </li>
+
+                                <?php endwhile;
+                                wp_reset_postdata();
+                            endif;
+                            ?>
+                        </ul>
+                    </div>
+                </li>
+            <?php else : ?>
+
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="<?= esc_url($link->href) ?>"><?= esc_html($link->label) ?></a>
+                </li>
+
+            <?php endif; ?>
+
+        <?php endforeach; ?>
+
     </ul>
 </nav>
+

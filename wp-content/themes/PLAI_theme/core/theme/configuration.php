@@ -4,7 +4,6 @@ function plaitheme_supports(): void
 {
     add_theme_support('title-tag');
     add_theme_support('menus');
-    register_nav_menu('header-menu', 'Header Menu');
 }
 
 ;
